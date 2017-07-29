@@ -1,0 +1,50 @@
+extends layout
+
+block content
+  .container
+    .row
+      .col-lg-8.col-lg-offset-2.col-md-10.col-md-offset-1
+        each post in posts
+          .post-preview
+            h2.post-title
+              =post.title
+            p.post-meta
+              | &nbsp;作者&nbsp;
+              a(href='users/center/'+post.author.id)=post.author.name
+              |  &nbsp;时间&nbsp;
+              span=moment(post.created).format('YYYY-MM-DD  h:mm:ss' )
+              | &nbsp;分类&nbsp;
+              span=post.category.name
+              button.zan(style="padding:0 10px;margin-left:20px;",data-id=post.id)
+                b=post.meta.fava
+                |赞
+            a(style="color:#333;")
+              h3.post-subtitle(style="text-align:justify;text-indent:2em;")
+                =post.content
+          hr
+          div.post-comments
+            h3 用户评论
+            div.post-commnet-list
+              if post.comments.length
+                ul.chat
+                  each comment in post.comments
+                    li.left.clearfix
+                      span.chat-img.pull-left
+                        img.img-circle(src="http://placehold.it/50/55C1E7/fff")
+                      div.chat-body.clearfix
+                        div.header
+                          strong.primary-font= comment.user
+                          small.pull-right.text-muted
+                            i.fa.fa-clock-o.fa-fw
+                            span= moment(comment.time).format('YYYY-MM-DD h:mm:ss' )
+                        p= comment.content
+              else
+                p.alert.alert-info 还没有评论
+            div.comment-div
+              div.msg
+              form.post-comment-form
+                textarea.comment-text
+                button.comment-btn#comment-btn(type="button",data-id=post.id) 提交评论
+  hr
+  p.hidden#user= users.name
+  script(src="/js/view.js")

@@ -1,0 +1,48 @@
+extends layout
+
+block content
+  .category-box
+    .category-wrap
+      each category in categories
+        label.fancy-radio
+          input(type="radio" name='category' value=category.id+'/'+category.name)
+          span
+            i
+            = category.name
+    p.demo-button
+      button.btn.btn-success(type='button',id='add_category')
+        i.fa.fa-check-circle
+        |  添加
+      button.btn.btn-warning(type='button',id='edit_category')
+        i.fa.fa-warning
+        |  修改
+      button.btn.btn-danger(type='button',id='del_category')
+        i.fa.fa-trash-o
+        |  删除
+      button.btn.btn-primary(type='button', disabled='disabled')
+        i.fa.fa-spinner.fa-spin
+        |  Loading...
+    .alert.alert-danger.alert-dismissible.c-del-msg(role='alert',style="margin-top:20px;display:none;")
+          button.close(type='button', data-dismiss='alert', aria-label='Close')
+            span(aria-hidden='true') ×
+          i.fa.fa-times-circle
+          b.text(style="font-weight:normal;") Your account has been suspended
+  .window-wrap
+    .window-info
+      .window-msg
+        h3 添加分类
+        label
+          span 分类名称
+          input.form-control.c-name(type="text",value="",placeholder="请输入标签名",id="c_name")
+        .row
+          .col-md-6
+            button.btn.btn-success.btn-block.c-edit(type='button',onclick="send_c()",data-id="") 确认
+          .col-md-6
+            button.btn.btn-warning.btn-block(type='button') 取消
+        .alert.alert-danger.alert-dismissible.c-danger-msg(role='alert',style="margin-top:20px;display:none;")
+          button.close(type='button', data-dismiss='alert', aria-label='Close')
+            span(aria-hidden='true') ×
+          i.fa.fa-times-circle
+          b.text(style="font-weight:normal;") Your account has been suspended
+
+

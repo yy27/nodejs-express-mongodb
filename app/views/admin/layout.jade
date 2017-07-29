@@ -1,0 +1,125 @@
+extends ../layout
+append css
+  link(rel='stylesheet', href='/css/admin.css')
+  link(rel='stylesheet', href='/css/chartist-custom.css')
+  // MAIN CSS
+  link(rel='stylesheet', href='/css/main.css')
+  link(rel='stylesheet', href='/css/demo.css')
+  // GOOGLE FONTS
+  link(href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700', rel='stylesheet')
+  link(rel='apple-touch-icon', sizes='76x76', href='/img/apple-icon.png')
+  link(rel='icon', type='image/png', sizes='96x96', href='/img/favicon.png')
+block main
+  div#wrapper
+    block header
+      nav.navbar.navbar-default.navbar-fixed-top
+        .brand
+          a(href='index.html')
+            img.img-responsive.logo(src='/img/logo-dark.png', alt='Klorofil Logo')
+        .container-fluid
+          .navbar-btn
+            button.btn-toggle-fullwidth(type='button')
+              i.lnr.lnr-arrow-left-circle
+          form.navbar-form.navbar-left
+            .input-group
+              input.form-control(type='text', value='', placeholder='Search dashboard...')
+              span.input-group-btn
+                button.btn.btn-primary(type='button') Go
+          .navbar-btn.navbar-btn-right
+            a.btn.btn-success.update-pro(href='#downloads/klorofil-pro-bootstrap-admin-dashboard-template/?utm_source=klorofil&utm_medium=template&utm_campaign=KlorofilPro', title='Upgrade to Pro', target='_blank')
+              i.fa.fa-rocket
+              span UPGRADE TO PRO
+          #navbar-menu
+            ul.nav.navbar-nav.navbar-right
+              li.dropdown
+                a.dropdown-toggle.icon-menu(href='#', data-toggle='dropdown')
+                  i.lnr.lnr-alarm
+                  span.badge.bg-danger 5
+                ul.dropdown-menu.notifications
+                  li
+                    a.notification-item(href='#')
+                      span.dot.bg-warning
+                      | System space is almost full
+                  li
+                    a.notification-item(href='#')
+                      span.dot.bg-danger
+                      | You have 9 unfinished tasks
+                  li
+                    a.notification-item(href='#')
+                      span.dot.bg-success
+                      | Monthly report is available
+                  li
+                    a.notification-item(href='#')
+                      span.dot.bg-warning
+                      | Weekly meeting in 1 hour
+                  li
+                    a.notification-item(href='#')
+                      span.dot.bg-success
+                      | Your request has been approved
+                  li
+                    a.more(href='#') See all notifications
+              li.dropdown
+                a.dropdown-toggle(href='#', data-toggle='dropdown')
+                  i.lnr.lnr-question-circle
+                  span Help
+                  i.icon-submenu.lnr.lnr-chevron-down
+                ul.dropdown-menu
+                  li
+                    a(href='#') Basic Use
+                  li
+                    a(href='#') Working With Data
+                  li
+                    a(href='#') Security
+                  li
+                    a(href='#') Troubleshooting
+              li.dropdown
+                a.dropdown-toggle(href='#', data-toggle='dropdown')
+                  img.img-circle(src='/img/user.png', alt='Avatar')
+                  span Samuel
+                  i.icon-submenu.lnr.lnr-chevron-down
+                ul.dropdown-menu
+                  li
+                    a(href='#')
+                      i.lnr.lnr-user
+                      span My Profile
+                  li
+                    a(href='#')
+                      i.lnr.lnr-envelope
+                      span Message
+                  li
+                    a(href='#')
+                      i.lnr.lnr-cog
+                      span Settings
+                  li
+                    a(href='#')
+                      i.lnr.lnr-exit
+                      span Logout
+              //
+                <li>
+                <a class="update-pro" href="#downloads/klorofil-pro-bootstrap-admin-dashboard-template/?utm_source=klorofil&utm_medium=template&utm_campaign=KlorofilPro" title="Upgrade to Pro" target="_blank"><i class="fa fa-rocket"></i> <span>UPGRADE TO PRO</span></a>
+      
+                </li>
+      #sidebar-nav.sidebar
+        .sidebar-scroll
+          nav
+            ul.nav
+              li
+                a.active(href='/admin/article')
+                  i.lnr.lnr-list
+                  span 文章列表
+              li
+                a(href='/admin/category')
+                  i.lnr.lnr-code
+                  span 管理分类
+      .main
+        .main-content
+          block content
+  block js
+    script(src='/js/jquery/jquery.min.js')
+    script(src='/js/bootstrap/js/bootstrap.min.js')
+    script(src='/js/jquery-slimscroll/jquery.slimscroll.min.js')
+    script(src='/js/jquery.easy-pie-chart/jquery.easypiechart.min.js')
+    script(src='/js/chartist/js/chartist.min.js')
+    script(src='/js/klorofil-common.js')
+    script(src="/js/admin.js")
+    

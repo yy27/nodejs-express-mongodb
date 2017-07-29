@@ -1,0 +1,110 @@
+extends layout
+
+block content
+  .top-post
+    .add-post
+      a(href="/admin/article/add")
+        button.btn.btn-primary.btn-block 添加文章
+  .container-fluid.post-table
+    .panel-body.no-padding
+      table.table.table-striped
+        thead
+          tr
+            th(width="30%")
+              if sorttype =='title'
+                if sortdir == 'desc'
+                  a(href="/admin/article?page="+nowPage+"&sorttype=title&sortdir=asc")
+                    i.lnr.lnr-arrow-up
+                    |标题
+                else
+                  a(href="/admin/article?page="+nowPage+"&sorttype=title&sortdir=desc")
+                    i.lnr.lnr-arrow-down
+                    |标题
+              else
+                a(href="/admin/article?page="+nowPage+"&sorttype=title")
+                  |标题
+            th(width="10%")
+              if sorttype =='category'
+                if sortdir == 'desc'
+                  a(href="/admin/article?page="+nowPage+"&sorttype=category&sortdir=asc")
+                    i.lnr.lnr-arrow-up
+                    |分类
+                else
+                  a(href="/admin/article?page="+nowPage+"&sorttype=category&sortdir=desc")
+                    i.lnr.lnr-arrow-down
+                    |分类
+              else
+                a(href="/admin/article?page="+nowPage+"&sorttype=category")
+                  |分类
+            th(width="10%") 作者
+            th(width="12%") 
+              if sorttype =='created'
+                if sortdir == 'desc'
+                  a(href="/admin/article?page="+nowPage+"&sorttype=created&sortdir=asc")
+                    i.lnr.lnr-arrow-up
+                    |添加时间
+                else
+                  a(href="/admin/article?page="+nowPage+"&sorttype=created&sortdir=desc")
+                    i.lnr.lnr-arrow-down
+                    |添加时间
+              else
+                a(href="/admin/article?page="+nowPage+"&sorttype=created")
+                  |添加时间
+            th(width="5%") 赞
+            th(width="5%") 评论
+            th(width="8%") 
+              if sorttype =='published'
+                if sortdir == 'desc'
+                  a(href="/admin/article?page="+nowPage+"&sorttype=published&sortdir=asc")
+                    i.lnr.lnr-arrow-up
+                    |状态
+                else
+                  a(href="/admin/article?page="+nowPage+"&sorttype=published&sortdir=desc")
+                    i.lnr.lnr-arrow-down
+                    |状态
+              else
+                a(href="/admin/article?page="+nowPage+"&sorttype=published")
+                  |状态
+            th(width="20%") 管理
+        tbody
+          each post in posts
+            tr
+              td
+                a(href='#')= post.title
+              td= post.category?post.category.name:'未定义分类'
+              td= post.author.name
+              td= moment(post.created).format('YYYY-MM-DD  h:mm:ss' )
+              td= post.meta.fava
+              td= post.comments.length
+              td= post.published? '已发布':'未发布'
+              td.post-btn
+                a(href='')
+                  button.btn.btn-success(type='button')
+                    i.fa.fa-check-circle
+                      |  查看
+                a(href='/admin/article/edit/'+post.id,target="_blank")
+                  button.btn.btn-primary(type='button')
+                    i.fa.fa-refresh
+                    |  编辑
+                button.btn.btn-danger(type='button',class="delect",data-id=post.id)
+                  i.fa.fa-trash-o
+                  |  删除   
+  div.pagebox(style="display: flex;justify-content: center;")
+    ul.pagination
+      li
+        a(href="?page="+(nowPage-1)) &laquo;
+      -for(var i=0;i<11;i++){
+        if startPage==nowPage
+          li.active
+            a=startPage++
+        else
+          if startPage>0
+            if startPage<=pageT
+              li
+                a(href="?page="+startPage)=startPage++
+          else
+            -startPage++
+      -}
+      li
+        a(href="?page="+(nowPage/1+1)) &raquo;
+  hr

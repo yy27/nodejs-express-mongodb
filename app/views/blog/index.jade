@@ -1,0 +1,48 @@
+extends layout
+
+block content
+  ul.leftnav
+    each category in categories
+      li
+        a(href="/article/category/"+category.name)= category.name
+  .container
+    .row
+      .col-lg-8.col-lg-offset-2.col-md-10.col-md-offset-1
+        h1.page-header
+          |nodejs全栈博客系统
+        each post in posts
+          .post-preview
+           a(href='article/view/'+post.id)
+            h2.post-title
+              =post.title
+            h3.post-subtitle
+              =truncate(post.content,160)
+           p.post-meta
+            | &nbsp;作者&nbsp;
+            a(href='users/center/'+post.author.id)=post.author.name
+            |  &nbsp;时间&nbsp;
+            span=moment(post.created).format('YYYY-MM-DD  h:mm:ss' )
+            | &nbsp;分类&nbsp;
+            a(href='/article/category/'+post.category.name)=post.category.name
+          hr
+      // Pager
+    div.pagebox(style="display: flex;justify-content: center;")
+      ul.pagination
+        li
+          a(href="?page="+(nowPage-1)) &laquo;
+        -for(var i=0;i<11;i++){
+          if startPage==nowPage
+            li.active
+              a=startPage++
+          else
+            if startPage>0
+              if startPage<=pageT
+                li
+                  a(href="?page="+startPage)=startPage++
+            else
+              -startPage++
+        -}
+        li
+          a(href="?page="+(nowPage/1+1)) &raquo;
+ hr
+

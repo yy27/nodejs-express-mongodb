@@ -1,0 +1,36 @@
+extends layout
+block content
+  form.edit-post(method="post",action="/admin/article/"+type)
+    label
+      span 标题
+      input.title(type="text",value=post.title,name="title",require="true")
+    label
+      span 内容
+      textarea.content(name="content")= post.content
+    label
+      span 分类
+      select.form-control.input-lg(name="category")
+        each category in categories
+          option(value=category.name)= category.name
+    label
+      span 状态
+      select.form-control.input-lg(name="published")
+        if post.published == true
+          if(type == 'add/')
+            option(value="true",selected="selected") 立即发布
+            option(value="false") 存草稿
+          else
+            option(value="true",selected="selected") 已发布
+            option(value="false") 未发布
+        else
+          if(type == 'add/')
+            option(value="true") 立即发布
+            option(value="false" selected="selected") 存草稿
+          else
+            option(value="true") 已发布
+            option(value="false" selected="selected") 未发布
+    p.btn-box
+      a(href="")
+        input.btn.btn-primary.btn-block(type="submit",value="确定")
+      a(href="/admin/article")
+        input.btn.btn-warning.btn-block(type="button",value="取消")
